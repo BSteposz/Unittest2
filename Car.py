@@ -1,11 +1,13 @@
 
 class Car(object):
     """ Random class car"""
-    def __init__(self, speed=0):
+    def __init__(self, speed=0, fuel_tank_capacity=40):
         """ Initialize default speed, distance and time """
         self.speed = speed
         self.odometer = 0
         self.time = 0
+        self.fuel_tank_capacity = fuel_tank_capacity
+        self.fuel = 20
 
     def say_state(self):
         """ Print current speed in km/k"""
@@ -22,13 +24,25 @@ class Car(object):
         else: self.speed -= 5
 
     def step(self):
+        while self.fuel > 0:
+            self.odometer += self.speed
+            self.time += 1
+            self.fuel -= 0.25
 
-        self.odometer += self.speed
-        self.time += 1
+        if self.fuel == 0:
+            print("You dont have fuel")
 
     def average_speed(self):
         """ Calculate avarge speed"""
         return self.odometer / self.time
+
+    def refueling(self):
+        """ refueling to max value """
+        if self.fuel < self.fuel_tank_capacity:
+            self.fuel += (self.fuel_tank_capacity - self.fuel)
+
+        else:
+            print("You dont need to refueling")
 
 
 if __name__ == '__main__':

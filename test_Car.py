@@ -17,6 +17,12 @@ class TestInit(TestCar):
     def test_initial_time(self):
         self.assertEqual(self.car.time, 0)
 
+    def test_initial_fuel_tank(self):
+        self.assertEqual(self.car.fuel_tank_capacity, 40)
+
+    def test_initial_fuel(self):
+        self.assertEqual(self.car.fuel, 20)
+
 
 class TestAccelerate(TestCar):
 
@@ -51,3 +57,10 @@ class TestBreak(TestCar):
         for _ in range(3):
             self.car.brake()
         self.assertEqual(self.car.speed, 0)
+
+
+class TestRefuel(TestCar):
+
+    def test_refuel(self):
+        self.car.refueling()
+        self.assertEqual(self.car.fuel, self.car.fuel_tank_capacity)
